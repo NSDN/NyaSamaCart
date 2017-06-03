@@ -1,0 +1,60 @@
+run <init>
+
+.<注意事项> {
+    仅可修改<main>段
+    图标及贴图仅可为png格式
+    以下为一个代码块，加载多少车就写多少个块
+
+    mov isAnchor, 0                 是否为锚车，1为锚车，反之为0
+    mov cartName, "NSPC-6"          矿车名，只能是英文，不能有空格，可以自行修改翻译文件（lang/zh_cn.lang）
+    mov cartIcon, "item_nspc_6"     矿车图标文件名，不能有空格，在textures/items/目录下存储，不用加后缀名
+    mov cartTexture, "nspc_6"       矿车贴图文件名，不能有空格，在textures/carts/目录下存储，不用加后缀名
+    call <load>                     调用加载函数，不可修改
+}
+
+<init> {
+    var isAnchor = 0
+    var cartName = 0
+    var cartIcon = 0
+    var cartTexture = 0
+    call <main>
+    end
+}
+
+<main> {
+    mov isAnchor, 1
+    mov cartName, "NSPC-6-Anchor"
+    mov cartIcon, "item_nspc_6_anchor"
+    mov cartTexture, "nspc_6"
+    call <load>
+
+    mov isAnchor, 0
+    mov cartName, "NSPC-6"
+    mov cartIcon, "item_nspc_6"
+    mov cartTexture, "nspc_6"
+    call <load>
+}
+
+<load> {
+    mov r0, 0
+    mov r0, isAnchor
+    mov r1, 0
+    mov r1, cartName
+    mov r2, 0
+    mov r2, cartIcon
+    mov r3, 0
+    mov r3, cartTexture
+
+    out 0, "isAnchor: "
+    prt r0
+    out 0, "cartName: "
+    prt r1
+    out 0, "cartIcon: "
+    prt r2
+    out 0, "cartTexture: "
+    prt r3
+    
+    prt "Loading..."
+    
+    cart
+}
