@@ -1,14 +1,13 @@
 package cn.ac.nya.nsasm;
 
 import cn.ac.nya.nsc.NyaSamaCart;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 
 import java.io.DataInputStream;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
+import java.util.jar.JarFile;
 
 /**
  * Created by drzzm on 2017.4.30.
@@ -145,12 +144,17 @@ public class Util {
     }
 
     public static String read(String path) {
-        IResourceManager manager = Minecraft.getMinecraft().getResourceManager();
-        ResourceLocation location = new ResourceLocation("nsc:" + path);
-        NyaSamaCart.log.info("Load: " + path);
-
+        String basePath = "assets/" + "nsc" + "/";
         try {
-            DataInputStream stream = new DataInputStream(manager.getResource(location).getInputStream());
+            String jarPath = Util.class.getProtectionDomain().getCodeSource().getLocation().getFile();
+            jarPath = jarPath.substring(6).split("!")[0];
+            NyaSamaCart.log.info("Jar: " + jarPath);
+            JarFile jar = new JarFile(jarPath);
+            NyaSamaCart.log.info("Path: " + jar.getName() + "!" + basePath);
+            NyaSamaCart.log.info("Load: " + path);
+            DataInputStream stream = new DataInputStream(
+                    jar.getInputStream(jar.getJarEntry(basePath + path))
+            );
             NyaSamaCart.log.info("Config size: " + stream.available());
             byte[] buffer = new byte[stream.available()];
             stream.readFully(buffer);
