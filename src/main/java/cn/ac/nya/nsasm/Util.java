@@ -4,6 +4,7 @@ import cn.ac.nya.nsc.NyaSamaCart;
 import net.minecraft.util.ResourceLocation;
 
 import java.io.DataInputStream;
+import java.net.URL;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
@@ -147,7 +148,8 @@ public class Util {
         String basePath = "assets/" + "nsc" + "/";
         try {
             String jarPath = Util.class.getProtectionDomain().getCodeSource().getLocation().getFile();
-            jarPath = jarPath.substring(6).split("!")[0];
+            URL url = new URL(jarPath);
+            jarPath = jarPath.substring(5).split("!")[0];
             NyaSamaCart.log.info("Jar: " + jarPath);
             JarFile jar = new JarFile(jarPath);
             NyaSamaCart.log.info("Path: " + jar.getName() + "!" + basePath);

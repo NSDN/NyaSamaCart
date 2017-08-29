@@ -1,9 +1,7 @@
 package cn.ac.nya.nsc.Cart;
 
-import cn.ac.nya.nsasm.NSASM;
 import cn.ac.nya.nsasm.Util;
 import cn.ac.nya.nsc.NyaSamaCart;
-import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.EntityRegistry;
@@ -47,14 +45,6 @@ public class CartLoader {
                 "Cart",
                 2224,
                 NyaSamaCart.getInstance(), 256, 3, true);
-    }
-
-    public static void loadRenderer(FMLInitializationEvent event) {
-        RenderingRegistry.registerEntityRenderingHandler(
-                AnchorCart.class, new CartRenderer(new CartModel()));
-
-        RenderingRegistry.registerEntityRenderingHandler(
-                Cart.class, new CartRenderer(new CartModel()));
     }
 
     private static void register(Item item, String name) {

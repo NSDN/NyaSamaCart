@@ -1,6 +1,6 @@
 package cn.ac.nya.nsc.Proxy;
 
-import cn.ac.nya.nsc.Cart.CartLoader;
+import cn.ac.nya.nsc.Cart.CartModelBinder;
 import cn.ac.nya.nsc.Event.EventRegister;
 import cpw.mods.fml.common.event.*;
 
@@ -17,7 +17,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void init(FMLInitializationEvent event) {
         super.init(event);
-        CartLoader.loadRenderer(event);
+        CartModelBinder.loadRenderer(event);
         EventRegister.registerClient();
     }
 
