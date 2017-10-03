@@ -1,7 +1,6 @@
 package cn.ac.nya.nsasm;
 
 import cn.ac.nya.nsc.NyaSamaCart;
-import net.minecraft.util.ResourceLocation;
 
 import java.io.DataInputStream;
 import java.net.URL;
